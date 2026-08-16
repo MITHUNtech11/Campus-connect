@@ -1,0 +1,5 @@
+- [x] google sign in
+- [x] placement portal
+- [x] teacher tags for places
+- [x] mock data and 10+ teachers
+- [x] mock announcements and community discussions data

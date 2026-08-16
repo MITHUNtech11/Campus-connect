@@ -1,0 +1,5 @@
+
+Role	Email	Password
+Student	demo.student@campusconnect.test	Demo@1234
+Teacher	demo.teacher@campusconnect.test	Demo@1234
+Admin	demo.admin@campusconnect.test	Demo@1234

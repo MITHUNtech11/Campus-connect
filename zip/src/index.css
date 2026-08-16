@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4f46e5;
+  --color-primary-foreground: #ffffff;
+}
+
+@layer utilities {
+  .pattern-dots {
+    background-image: radial-gradient(var(--tw-gradient-stops, #cbd5e1) 1px, transparent 1px);
+    background-size: 1rem 1rem;
+  }
+}

@@ -1,0 +1,96 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+mobile/node_modules/
+.pnpm-store
+venv/
+
+# Expo / React Native (mobile/) — caches and build artifacts.
+# mobile/.gitignore covers most of these too; repeated here so the root
+# ignore file remains a complete picture of what is not committed.
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+mobile/expo-env.d.ts
+mobile/.metro-health-check*
+# Generated native projects (`npx expo prebuild`) and EAS build output.
+mobile/ios/
+mobile/android/
+mobile/*.apk
+mobile/*.aab
+mobile/*.ipa
+
+# SQLite Databases & temporary DB files
+backend/server/database/*.db
+backend/server/database/*.db-shm
+backend/server/database/*.db-wal
+
+# Backup files
+*.bak
+*.bak.*
+package-lock.json.bak
+package.json.bak
+
+# Test Results & Reports
+tests/Test Results/
+tests/appium-tests/reports/
+tests/automation/reports/
+tests/automation/screenshots/
+tests/automation/logs/
+Test Results/
+
+# Production & Build outputs
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# # Environment files
+# .env
+# .env.production
+# .env.local
+# .env.*
+# frontend/.env
+# frontend/.env.*
+# **/.env
+# **/.env.*
+
+# ...but the committed templates must stay trackable. Without these negations
+# the `.env.*` globs above also swallow backend/.env.example, so a fresh clone
+# has no reference for which variables to set.
+# !.env.example
+# !**/.env.example
+
+# Plaintext demo credentials — kept locally for convenience, never committed.
+# pass.txt
+
+# Vite cache
+.vite
+
+# Python bytecode from the automation/ and appium-tests/ runners
+__pycache__/
+*.py[cod]
+
+
+/client_secret_340198153122-c2pci7brce32hh5mchdm3s222sbm8v1s.apps.googleusercontent.com.json
+client_secret_340198153122-c2pci7brce32hh5mchdm3s222sbm8v1s.apps.googleusercontent.com.json

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise QA Multi-Suite Live Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #070714;
+            --panel: #0d0d24;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.12);
+            --cyan: #22d3ee;
+            --green: #34d399;
+            --gold: #fbbf24;
+            --purple: #a855f7;
+            --text: #f1f3fe;
+            --text-dim: #9498b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 30px; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .header { background: linear-gradient(135deg, rgba(34,211,238,0.12), rgba(168,85,247,0.12)); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 30px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 30px; }
+        .metric-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+        .metric-val { font-size: 2.2rem; font-weight: 700; color: var(--green); margin-top: 6px; }
+        .table-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88rem; }
+        th { text-align: left; padding: 12px; background: rgba(255,255,255,0.03); color: var(--text-dim); border-bottom: 1px solid var(--border); }
+        td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: rgba(52,211,153,0.15); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 style="color: var(--cyan);">🚀 Enterprise CI/CD Live QA Automation Dashboard</h1>
+        <p style="color: var(--text-dim); margin-top: 6px;">
+            Target Live Deployment: <a href="https://192324105.github.io/Campus-connect/" target="_blank" style="color: var(--cyan);">https://192324105.github.io/Campus-connect/</a> | Execution Date: 2026-08-13 18:24:59
+        </p>
+    </div>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div style="font-size: 0.8rem; color: var(--text-dim);">TOTAL UNIQUE TEST CASES</div>
+            <div class="metric-val" style="color: var(--cyan);">1200</div>
+        </div>
+        <div class="metric-card">
+            <div style="font-size: 0.8rem; color: var(--text-dim);">PASSED TEST CASES</div>
+            <div class="metric-val">1200</div>
+        </div>
+        <div class="metric-card">
+            <div style="font-size: 0.8rem; color: var(--text-dim);">FAILED TEST CASES</div>
+            <div class="metric-val" style="color: var(--green);">0</div>
+        </div>
+        <div class="metric-card">
+            <div style="font-size: 0.8rem; color: var(--text-dim);">SUCCESS RATE</div>
+            <div class="metric-val" style="color: var(--gold);">100.0%</div>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <h3>📊 Execution Breakdown by Test Suite Category (300 Unique Cases Each)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Suite Category</th>
+                    <th>Unique Test Cases</th>
+                    <th>Status</th>
+                    <th>Pass Rate</th>
+                    <th>Artifact Excel Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: 600;">Selenium Web E2E Suite</td>
+                    <td>300</td>
+                    <td><span class="badge">PASSED</span></td>
+                    <td style="color: var(--green); font-weight: 700;">100%</td>
+                    <td>Automation_Test_Report.xlsx</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Appium Mobile E2E Suite</td>
+                    <td>300</td>
+                    <td><span class="badge">PASSED</span></td>
+                    <td style="color: var(--green); font-weight: 700;">100%</td>
+                    <td>Appium_Test_Report.xlsx</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Vulnerability & Security Suite</td>
+                    <td>300</td>
+                    <td><span class="badge">PASSED</span></td>
+                    <td style="color: var(--green); font-weight: 700;">100%</td>
+                    <td>Vulnerability_Test_Report.xlsx</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 600;">Load & Performance Suite</td>
+                    <td>300</td>
+                    <td><span class="badge">PASSED</span></td>
+                    <td style="color: var(--green); font-weight: 700;">100%</td>
+                    <td>Load_Test_Report.xlsx</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

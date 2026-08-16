@@ -1,0 +1,134 @@
+name: CI/CD Live Deployment & Parallel E2E Testing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deployment-and-tests"
+  cancel-in-progress: true
+
+jobs:
+  # ========================================================
+  # JOB 1: BUILD AND DEPLOY TO GITHUB PAGES
+  # ========================================================
+  build-and-deploy:
+    name: Build & Deploy Application to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js & Install Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install NPM Packages
+        run: npm ci || npm install
+
+      - name: Build Application for GitHub Pages
+        run: npm run build
+        env:
+          VITE_BASE_URL: '/Campus-connect/'
+
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
+
+  # ========================================================
+  # JOB 2: PARALLEL TEST MATRIX EXECUTION (4 PARALLEL RUNNERS)
+  # ========================================================
+  parallel-test-matrix:
+    name: Parallel Test Execution
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [selenium, appium, vulnerability, load]
+    
+    env:
+      BASE_URL: "https://192324105.github.io/Campus-connect/"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openpyxl requests selenium
+
+      - name: Execute Parallel Suite [${{ matrix.suite }}] (300 Unique Cases)
+        run: |
+          python automation/run_all_tests.py --suite ${{ matrix.suite }}
+        env:
+          BASE_URL: "${{ env.BASE_URL }}"
+
+      - name: Upload Excel & Reports Artifact for [${{ matrix.suite }}]
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Excel-Report-${{ matrix.suite }}
+          path: |
+            Test Results/Excel/
+            automation/reports/Excel/
+            Test Results/HTML/
+            Test Results/Summary/
+          retention-days: 30
+
+  # ========================================================
+  # JOB 3: AGGREGATE REPORTS & PUBLISH SUMMARY
+  # ========================================================
+  publish-summary:
+    name: Aggregate Reports & Publish Summary
+    needs: parallel-test-matrix
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install openpyxl requests selenium
+
+      - name: Run Master Report Aggregation
+        run: |
+          python automation/run_all_tests.py --suite all
+
+      - name: Publish Step Summary
+        run: |
+          cat "Test Results/Summary/summary.md" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Consolidated QA Artifacts Suite
+        uses: actions/upload-artifact@v4
+        with:
+          name: Consolidated-Enterprise-QA-Reports
+          path: |
+            Test Results/
+            automation/reports/
+          retention-days: 30

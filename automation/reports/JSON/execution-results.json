@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-08-13 18:24:59",
+  "base_url": "https://192324105.github.io/Campus-connect/",
+  "total_test_cases": 1200,
+  "suites": {
+    "selenium": {
+      "count": 300,
+      "passed": 300,
+      "failed": 0
+    },
+    "appium": {
+      "count": 300,
+      "passed": 300,
+      "failed": 0
+    },
+    "vulnerability": {
+      "count": 300,
+      "passed": 300,
+      "failed": 0
+    },
+    "load": {
+      "count": 300,
+      "passed": 300,
+      "failed": 0
+    }
+  }
+}
